@@ -1,0 +1,49 @@
+.header{
+    height:80px;
+    background-color:white;
+    .hader_top{
+        height:40px;
+        border-bottom:1px solid orange;
+        text-align:right;
+        line-height:39px;
+        .header_name{
+            margin:0 0 0 10px;
+        }
+        .logout{
+            margin-right:10px;
+        }
+    }
+    .hader_bottom{
+        height:40px;
+        line-height:40px;
+        display:flex;
+        .bottom_left{
+            width:25%;
+            text-align:center;
+            span{
+                display:inline-block;
+                width:60px;
+                position:relative;
+                &::before{
+                    content:'';
+                    width:0;
+                    height:0;
+                    border-width:20px;
+                    border-style:solid;
+                    border-color:white transparent transparent;
+                    position:absolute;
+                    top:35px;
+                    left:8px;
+                }
+            }
+        }
+        .bottom_right{
+            width:75%;
+            text-align:right;
+            margin-right:20px;
+            .weather{
+                margin:0 5px;
+            }
+        }
+    }
+}
