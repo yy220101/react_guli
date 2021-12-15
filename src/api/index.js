@@ -30,3 +30,6 @@ export const reqCategoryList= () => Myaxios.get(`${BASE_URL}/api1/manage/categor
 
 //请求天气信息
 export const reqWeather= () => Myaxios.get(`${BASE_URL}/api2/weather/v1/?district_id=${CITY}&data_type=all&ak=${WEATHER_AK}`)
+
+//更新分类
+export const reqUpdateCate=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/category/update`,data)

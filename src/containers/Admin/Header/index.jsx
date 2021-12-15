@@ -92,7 +92,7 @@ class Header extends Component {
     //显示头部标题，不能直接在底部返回，以为当前页面每一秒钟都会从新render
     //默认在组件挂载完成之后手动调用一次
     getTitle=()=>{
-        console.log('aaa');
+        // console.log('aaa');
         const pathName=this.props.location.pathname
         let title
         //循环menulist找到path相同的那一项，然后返回它的title并赋值给提前声明好的变量

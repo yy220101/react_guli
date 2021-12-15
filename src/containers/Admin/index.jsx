@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Redirect,Route,Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { Layout } from 'antd';
-import {reqCategoryList} from '../../api/index'
+// import {reqCategoryList} from '../../api/index'
 import Header from './Header'
 import Home from '../../components/Home'
 import Categroy from '../Categroy'
@@ -24,10 +24,10 @@ class Admin extends Component {
     // logout=()=>{
         // this.props.deleteUser()
     // }
-    categoryList=async()=>{
-        const result=await reqCategoryList()
-        console.log(result);
-    }
+    // categoryList=async()=>{
+    //     const result=await reqCategoryList()
+    //     console.log(result);
+    // }
     render() {
         const {isLogin}=this.props.userInfo
         //登录成功之后会跳转到admin页面
