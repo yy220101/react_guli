@@ -13,9 +13,10 @@ import Role from '../Role'
 import Bar from '../Bar'
 import Line from '../Line'
 import Pie from '../Pie'
+import LeftNav from './Left_nav';
 import './css/index.less'
 
-const { Footer, Sider, Content } = Layout;
+const { Footer, Content } = Layout;
 @connect(
     state=>({userInfo:state.userInfo}),
     // {deleteUser}
@@ -36,7 +37,9 @@ class Admin extends Component {
         }
         return (
             <Layout className="admin">
-                <Sider className="sider">Sider</Sider>
+                {/* <Sider className="sider"> */}
+                    <LeftNav/>
+                {/* </Sider> */}
                 <Layout>
                     <Header></Header>
                     <Content className='content'>

@@ -6,7 +6,7 @@ import {Redirect} from 'react-router-dom'
 import {reqLogin} from '../../api'
 import {saveUser} from '../../redux/actions/login_action'
 import './css/login.less'
-import logo from './imgs/logo.png'
+import logo from '../../static/imgs/logo.png'
 
 const {Item} = Form
 // 获取当前 location
@@ -21,7 +21,7 @@ class Login extends Component {
     render() {
         const {isLogin}=this.props
         if(isLogin){
-            return <Redirect to='/admin'/>
+            return <Redirect to='/admin/home'/>
         }
         // console.log(this.props);
         const onFinish = async(values) => {
