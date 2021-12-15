@@ -1,4 +1,5 @@
-import Myaxios from './MyAxios'
+//此文将用来统一处理页面上所有的请求
+import Myaxios from './MyAxios';
 import {BASE_URL,CITY,WEATHER_AK} from '../config'
 // import jsonp from 'jsonp'
 // import {message} from 'antd'
@@ -26,4 +27,6 @@ export const reqCategoryList= () => Myaxios.get(`${BASE_URL}/api1/manage/categor
 //         })
 //     })
 // }
+
+//请求天气信息
 export const reqWeather= () => Myaxios.get(`${BASE_URL}/api2/weather/v1/?district_id=${CITY}&data_type=all&ak=${WEATHER_AK}`)

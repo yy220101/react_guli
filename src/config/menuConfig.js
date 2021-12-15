@@ -15,7 +15,7 @@ const menuList = [
         icon: 'AppstoreOutlined',
         children: [ //* 子菜单列表
             {
-                title: '商品分类管理',
+                title: '分类管理',
                 key: 'categroy',
                 path: '/admin/prod/categroy',
                 icon: 'BarsOutlined',

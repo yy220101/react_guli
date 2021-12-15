@@ -13,6 +13,7 @@ const {Item} = Form
 // const location = history.location;
 
 @connect(
+    //从redux中取isLogin在下边用来判断是否登录
     state=>({isLogin:state.userInfo.isLogin}),
     {saveUser}
 )
@@ -20,23 +21,27 @@ class Login extends Component {
     
     render() {
         const {isLogin}=this.props
+        //如果已经登录就不让用户再停留在login页面，直接重定向跳转到home页面
         if(isLogin){
             return <Redirect to='/admin/home'/>
         }
-        // console.log(this.props);
+        //form表单验证成功之后的回调函数
         const onFinish = async(values) => {
             // const { username,password }=values
             let result=await reqLogin(values)
             const {data,status}=result
-            // console.log(result);
+            //reqLogin请求的返回值是一个promise对象，所以使用async，await获取请求成功之后的数据
+            //判断状态码为o的时候调用saveUser修改状态的方法向redux中保存数据
+            //并且跳转到home页面上，使用replace方法是因为不应该让用户回退到login页面了
             if(status===0){
                 this.props.saveUser(data)
-                this.props.history.replace('/admin')
+                this.props.history.replace('/admin/home')
             }else{
+            //请求成功了返回的状态码如果不是0的时候显示对应的msg提示框，一秒钟那个之后消失
                 message.warning(result.msg,1)
             }
         };
-        
+        //form表单验证失败之后的回调函数
         const onFinishFailed = (errorInfo) => {
             console.log('Failed:', errorInfo);
         };
@@ -49,7 +54,7 @@ class Login extends Component {
                 <section>
                     <h1>用户登录</h1>
                     <Form className="login-form" onFinish={onFinish}
-      onFinishFailed={onFinishFailed}>
+                            onFinishFailed={onFinishFailed}>
                         <Item name="username"  
                             rules={[
                                 { required: true, message: '用户名不能为空' },

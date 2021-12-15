@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Redirect,Route,Switch} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { Layout } from 'antd';
-// import {deleteUser} from '../../redux/actions/login_action'
 import {reqCategoryList} from '../../api/index'
 import Header from './Header'
 import Home from '../../components/Home'
@@ -19,7 +18,6 @@ import './css/index.less'
 const { Footer, Content } = Layout;
 @connect(
     state=>({userInfo:state.userInfo}),
-    // {deleteUser}
     {}
 )
 class Admin extends Component {
@@ -32,6 +30,8 @@ class Admin extends Component {
     }
     render() {
         const {isLogin}=this.props.userInfo
+        //登录成功之后会跳转到admin页面
+        //如果用户得到了/admin路径直接在地址栏访问的话要做处理，从redux中取isLogin的状态值，如果是false就重定向到login
         if(!isLogin){
             return <Redirect to='/login'/>
         }
