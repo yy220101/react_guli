@@ -4,3 +4,5 @@ export const BASE_URL='' //发送请求基本路径，当前在开发环境，�
 export const CITY='110100'
 //配置请求天气AK
 export const WEATHER_AK='7zaABosFYIipGRKwVh0RZiqRkdHplGIp'
+//配置列表每页展示条数
+export const PAGE_NUMBER=5

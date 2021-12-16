@@ -9,7 +9,7 @@ export default class App extends Component {
             <div className='app'>
                 <Switch>
                     <Route path='/login' component={Login}/>
-                    <Route path='/admin/home' component={Admin}/>
+                    <Route path='/admin' component={Admin}/>
                     <Redirect to="/admin/home"/>
                 </Switch>
             </div>

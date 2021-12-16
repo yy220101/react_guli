@@ -35,3 +35,13 @@ export const reqWeather= () => Myaxios.get(`${BASE_URL}/api2/weather/v1/?distric
 export const reqUpdateCate=(categoryId,categoryName)=>Myaxios.post(`${BASE_URL}/api1/manage/category/update`,{categoryId,categoryName})
 //新增分类
 export const reqAddCate=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/category/add`,data)
+
+//获取商品分页列表
+export const reqProductList =(pageNum,pageSize)=>Myaxios.get(`${BASE_URL}/api1/manage/product/list`,{params:{pageNum,pageSize}})
+
+//对商品进行上架下架处理
+export const reqUpdateList=(productId,status)=>Myaxios.post(`${BASE_URL}/api1/manage/product/updateStatus`,{productId,status})
+
+//根据ID/Name搜索产品分页列表/manage/product/search?pageNum=1&pageSize=5&productName=T
+//(number,PAGE_NUMBER,productType,inputVal)
+export const reqSearchList=(data)=>Myaxios.get(`${BASE_URL}/api1/manage/product/search`,{params:data})

@@ -82,7 +82,6 @@ class Header extends Component {
         this.getWeather()
         //手动调用操作头部标题显示函数，以便页面一上来的时候显示头部标题
         this.getTitle()
-        console.log(111);
     }
 
     //组件将要卸载的时候清除定时器
@@ -94,7 +93,7 @@ class Header extends Component {
     //默认在组件挂载完成之后手动调用一次
     getTitle=()=>{
         const pathName=this.props.location.pathname
-        console.log(pathName);
+        // console.log(pathName);
         let title
         //循环menulist找到path相同的那一项，然后返回它的title并赋值给提前声明好的变量
         menuList.forEach((item)=>{
@@ -114,7 +113,7 @@ class Header extends Component {
         //存到redux中，用的时候从redux中取
         // return title
         this.props.saveTitle(title)
-        console.log(title);
+        // console.log(title);
     }
     render() {
         //从redux中获取用户信息
