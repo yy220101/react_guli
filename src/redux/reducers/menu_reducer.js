@@ -4,7 +4,8 @@ export default function Left(prestate=initState,action){
     const {type,data}=action;
     switch (type) {
         case SAVE_TITLE:
-            return data
+            console.log(data);
+            return data ||null
         default:
             return prestate
     }

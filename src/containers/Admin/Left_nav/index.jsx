@@ -85,7 +85,7 @@ class LeftNav extends Component {
                     defaultOpenKeys接收的必须是一个数组，可以接收多个值底层会自动处理
                 */}
                 <Menu
-                    defaultSelectedKeys={this.props.location.pathname.split('/').reverse()[0]}
+                    selectedKeys={this.props.location.pathname.split('/').reverse()[0]}
                     defaultOpenKeys={this.props.location.pathname.split('/').splice(2)}
                     mode="inline"
                     theme="dark"
