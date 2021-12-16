@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Add extends Component {
+export default class Detail extends Component {
     render() {
         return (
             <div>
-                添加
+                我是详情页面
             </div>
         )
     }

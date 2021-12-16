@@ -115,8 +115,12 @@ export default class Product extends Component {
             render:()=>{
                 return (
                     <>
-                    <Button type='link'>详情</Button><br/>
-                    <Button type='link'>修改</Button>
+                    <Button type='link'>
+                        <Link to='/admin/prod/product/detail'>详情</Link>
+                    </Button><br/>
+                    <Button type='link'>
+                        <Link to='/admin/prod/product/add_update'>修改</Link>
+                    </Button>
                     </>
                 )
             }
@@ -141,7 +145,7 @@ export default class Product extends Component {
                 }
                 extra={
                     <Button type="primary" icon={<PlusOutlined />}>
-                        <Link to='/admin/prod/add'>添加商品</Link>
+                        <Link to='/admin/prod/product/add_update'>添加商品</Link>
                     </Button>
                 }
             >
