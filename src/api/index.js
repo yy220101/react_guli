@@ -44,4 +44,4 @@ export const reqUpdateList=(productId,status)=>Myaxios.post(`${BASE_URL}/api1/ma
 
 //根据ID/Name搜索产品分页列表/manage/product/search?pageNum=1&pageSize=5&productName=T
 //(number,PAGE_NUMBER,productType,inputVal)
-export const reqSearchList=(data)=>Myaxios.get(`${BASE_URL}/api1/manage/product/search`,{params:data})
+export const reqSearchList=(pageNum,pageSize,producetType,inputVal)=>Myaxios.get(`${BASE_URL}/api1/manage/product/search`,{params:{pageNum,pageSize,[producetType]:inputVal}})

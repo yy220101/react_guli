@@ -13,6 +13,7 @@ import Bar from '../Bar'
 import Line from '../Line'
 import Pie from '../Pie'
 import LeftNav from './Left_nav';
+import Add from '../Add';
 import './css/index.less'
 
 const { Footer, Content } = Layout;
@@ -52,6 +53,7 @@ class Admin extends Component {
                             <Route path="/admin/charts/bar" component={Bar}/>
                             <Route path="/admin/charts/bar" component={Line}/>
                             <Route path="/admin/charts/pie" component={Pie}/>
+                            <Route path='/admin/prod/add' component={Add}/>
                             <Redirect to="/admin/home" component={Home}/>
                         </Switch>
                     </Content>

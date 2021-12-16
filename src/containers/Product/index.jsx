@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import { Card,Button,Table,Select,Input, message } from 'antd';
 import {
     PlusOutlined,
@@ -14,67 +15,50 @@ export default class Product extends Component {
         current:1,       //当前页码
         productType:'productDesc',    //通过什么方式搜索
         inputVal:'',         //输入框内容
-        isLoading:true,
-        search:false
+        isLoading:true,     //页面加载
     }
 
     //获取商品分页列表。默认页码为1
     getProductList=async(number=1)=>{
-        if(this.state.search){
-            this.searchList(number)
-        }else{
-            let result=await reqProductList(number,PAGE_NUMBER)
-            this.setState({isLoading:false})
-            const {status,data,msg}=result
-            if(status===0){
-                this.setState({
-                    productList:data.list,
-                    total:data.total,
-                    current:data.pageNum
-                })
-            }else{
-                message.error(msg,1)
-            }
-        }
-    }
-
-    //对商品进行上架下架处理
-    updateStatus=async(obj)=>{
-        // console.log(obj._id,obj.status);
-        let result=await reqUpdateList(obj._id,obj.status)
-        // console.log(result);
-        const {status,msg}=result
-        if(status===0){
-            this.getProductList()
-        }else{
-            message.error(msg,1)
-        }
-    }
-    //点击搜索按钮的回调
-    searchList=async(number=1)=>{
-        const {productType,inputVal,search}=this.state
-        this.setState({search:true})
-        let result=await reqSearchList({pageNum:number,pageSize:PAGE_NUMBER,[productType]:inputVal})
+        const {productType,inputVal}=this.state
+        let result;
+        if(this.isSearch) result=await reqSearchList(number,PAGE_NUMBER,productType,inputVal)
+        else result=await reqProductList(number,PAGE_NUMBER)
         this.setState({isLoading:false})
-        const {status,data,msg}=result
-        if(status===0){
-            this.setState({
+        const {status,data}=result
+        if(status===0) this.setState({
                 productList:data.list,
                 total:data.total,
                 current:data.pageNum
             })
-        }else{
-            message.error(msg,1)
+        else message.error('获取商品列表失败',1)
+    }
+
+    //对商品进行上架下架处理
+    updateStatus=async(obj)=>{
+        let st=obj.status===1?2:1
+        let result=await reqUpdateList(obj._id,st)
+        const {status}=result
+        // status===0 ? this.getProductList() : message.error('更新状态失败',1)
+        if(status===0){
+            const {productList}=this.state
+            let newList=productList.map((item)=>{
+                if(item._id===obj._id) item.status=st
+                return item
+            })
+            this.setState({productList:newList})
         }
     }
+    //点击搜索按钮的回调
+    searchList=()=>{
+        this.isSearch=true
+        this.getProductList()
+    }
     //下拉框值发生变化的回调
-    selectChange=(event)=>{
-        this.setState({productType:event})
-    }
+    selectChange= event => this.setState({productType:event}) 
     //输入框发生变化的时候的回调
-    inputChange=(event)=>{
-        this.setState({inputVal:event.target.value})
-    }
+    inputChange= event => this.setState({inputVal:event.target.value})
+    
     //页面挂载完成调取数据渲染页面
     componentDidMount(){
        this.getProductList()
@@ -152,12 +136,12 @@ export default class Product extends Component {
                             allowClear
                             onChange={this.inputChange}
                         />
-                        <Button type='primary' onClick={()=>this.searchList()}>搜索</Button>
+                        <Button type='primary' onClick={this.searchList}>搜索</Button>
                     </>
                 }
                 extra={
                     <Button type="primary" icon={<PlusOutlined />}>
-                        添加商品
+                        <Link to='/admin/prod/add'>添加商品</Link>
                     </Button>
                 }
             >
