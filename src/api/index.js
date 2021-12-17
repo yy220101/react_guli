@@ -45,3 +45,9 @@ export const reqUpdateList=(productId,status)=>Myaxios.post(`${BASE_URL}/api1/ma
 //根据ID/Name搜索产品分页列表/manage/product/search?pageNum=1&pageSize=5&productName=T
 //(number,PAGE_NUMBER,productType,inputVal)
 export const reqSearchList=(pageNum,pageSize,producetType,inputVal)=>Myaxios.get(`${BASE_URL}/api1/manage/product/search`,{params:{pageNum,pageSize,[producetType]:inputVal}})
+
+//根据商品id获取详细信息
+export const reqDetail=(productId)=>Myaxios.get(`${BASE_URL}/api1/manage/product/info`,{params:{productId}})
+
+//根据分类ID获取分类
+export const reqCategory=(categoryId)=>Myaxios.get(`${BASE_URL}/api1/manage/category/info`,{params:{categoryId}})

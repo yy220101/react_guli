@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import { Button, Card ,Table,message,Modal,Input,Form} from 'antd';
 import {PlusOutlined} from '@ant-design/icons'
+import { connect } from 'react-redux';
 import {reqCategoryList,reqUpdateCate,reqAddCate} from '../../api'
+import {saveCateList} from '../../redux/actions/cate_action'
 
 const {Item}=Form
-export default class Category extends Component {
+@connect(
+    state=>({}),
+    {saveCateList}
+)
+class Category extends Component {
     state={
         categoryList:[],     //商品分类列表
         visible:false,      //弹窗显示
@@ -22,6 +28,7 @@ export default class Category extends Component {
         }else{
             message.error(msg,1)
         }
+        this.props.saveCateList(data)
     }
     //默认组件一挂载就请求
     componentDidMount(){
@@ -148,3 +155,4 @@ export default class Category extends Component {
         )
     }
 }
+export default Category

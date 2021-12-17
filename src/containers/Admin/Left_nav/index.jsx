@@ -63,7 +63,7 @@ class LeftNav extends Component {
     render() {
         //从icon中取出两个图标
         const {MenuUnfoldOutlined,MenuFoldOutlined}=Icon
-        // const pathArr=this.props.location.pathname.split('/')
+        const {pathname}=this.props.location
         return (
             // 这里为了实现收起整个左侧菜单的功能，所以最外部比如是一个sider标签
             //具体使用参考antd文档
@@ -85,8 +85,8 @@ class LeftNav extends Component {
                     defaultOpenKeys接收的必须是一个数组，可以接收多个值底层会自动处理
                 */}
                 <Menu
-                    selectedKeys={this.props.location.pathname.split('/').reverse()[0]}
-                    defaultOpenKeys={this.props.location.pathname.split('/').splice(2)}
+                    selectedKeys={pathname.indexOf('product')!==-1?'product':pathname.split('/').reverse()[0]}
+                    defaultOpenKeys={pathname.split('/').splice(2)}
                     mode="inline"
                     theme="dark"
                 >

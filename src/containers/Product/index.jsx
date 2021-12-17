@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import { Card,Button,Table,Select,Input, message } from 'antd';
-import {
-    PlusOutlined,
-} from '@ant-design/icons';
+import { PlusOutlined} from '@ant-design/icons';
+import { connect } from 'react-redux';
+import {saveProductList} from '../../redux/actions/product_action'
 import {reqProductList,reqUpdateList,reqSearchList} from '../../api'
 import {PAGE_NUMBER} from '../../config'
 
 const {Option }=Select
-export default class Product extends Component {
+@connect(
+    state=>({}),
+    {saveProductList}
+)
+class Product extends Component {
     state={
         productList:[], //商品分页列表
         total:'',       //总共多少条数据
@@ -18,7 +21,7 @@ export default class Product extends Component {
         isLoading:true,     //页面加载
     }
 
-    //获取商品分页列表。默认页码为1
+    //获取商品分页列表和商品搜索列表。默认页码为1
     getProductList=async(number=1)=>{
         const {productType,inputVal}=this.state
         let result;
@@ -32,6 +35,7 @@ export default class Product extends Component {
                 current:data.pageNum
             })
         else message.error('获取商品列表失败',1)
+        this.props.saveProductList(data.list)
     }
 
     //对商品进行上架下架处理
@@ -68,63 +72,63 @@ export default class Product extends Component {
         const {isLoading}=this.state
           
         const columns = [
-        {
-            title: '商品名称',
-            dataIndex: 'name',
-            key: 'name',
-        },
-        {
-            title: '商品描述',
-            dataIndex: 'desc',
-            key: 'desc',
-        },
-        {
-            title: '价格',
-            dataIndex: 'price',
-            key: 'price',
-            width:'10%',
-            render:price => '￥'+price
-        },
-        {
-            title: '状态',
-            // dataIndex: 'status',
-            key: 'status',
-            align:'center',
-            width:'10%',
-            render:(data)=>{
-                return (
-                    <>
-                        <Button 
-                            type='primary'
-                            danger={data.status===1}
-                            onClick={()=>this.updateStatus(data)}
-                        >
-                            {data.status===1?'下架':'上架'}
+            {
+                title: '商品名称',
+                dataIndex: 'name',
+                key: 'name',
+            },
+            {
+                title: '商品描述',
+                dataIndex: 'desc',
+                key: 'desc',
+            },
+            {
+                title: '价格',
+                dataIndex: 'price',
+                key: 'price',
+                width:'10%',
+                render:price => '￥'+price
+            },
+            {
+                title: '状态',
+                // dataIndex: 'status',
+                key: 'status',
+                align:'center',
+                width:'10%',
+                render:(data)=>{
+                    return (
+                        <>
+                            <Button 
+                                type='primary'
+                                danger={data.status===1}
+                                onClick={()=>this.updateStatus(data)}
+                            >
+                                {data.status===1?'下架':'上架'}
+                            </Button>
+                            <p>{data.status===1?'在售':'已下架'}</p>
+                        </>
+                    )
+                }
+            },
+            {
+                title: '操作',
+                // dataIndex: 'operation',
+                key: 'operation',
+                align:'center',
+                width:'10%',
+                render:(item)=>{
+                    return (
+                        <>
+                        <Button type='link' onClick={()=>this.props.history.push(`/admin/prod/product/detail/${item._id}`)}>
+                            详情
+                        </Button><br/>
+                        <Button type='link' onClick={()=>this.props.history.push('/admin/prod/product/add_update/123456')}>
+                            修改
                         </Button>
-                        <p>{data.status===1?'在售':'已下架'}</p>
-                    </>
-                )
-            }
-        },
-        {
-            title: '操作',
-            dataIndex: 'operation',
-            key: 'operation',
-            align:'center',
-            width:'10%',
-            render:()=>{
-                return (
-                    <>
-                    <Button type='link'>
-                        <Link to='/admin/prod/product/detail'>详情</Link>
-                    </Button><br/>
-                    <Button type='link'>
-                        <Link to='/admin/prod/product/add_update'>修改</Link>
-                    </Button>
-                    </>
-                )
-            }
-        },
+                        </>
+                    )
+                }
+            },
         ];
         return (
             <Card 
@@ -144,8 +148,12 @@ export default class Product extends Component {
                     </>
                 }
                 extra={
-                    <Button type="primary" icon={<PlusOutlined />}>
-                        <Link to='/admin/prod/product/add_update'>添加商品</Link>
+                    <Button 
+                        type="primary"
+                        icon={<PlusOutlined />}
+                        onClick={()=>this.props.history.push('/admin/prod/product/add_update')}
+                    >
+                        添加商品
                     </Button>
                 }
             >
@@ -166,3 +174,4 @@ export default class Product extends Component {
         )
     }
 }
+export default Product

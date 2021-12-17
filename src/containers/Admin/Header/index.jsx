@@ -93,8 +93,8 @@ class Header extends Component {
     //默认在组件挂载完成之后手动调用一次
     getTitle=()=>{
         const pathName=this.props.location.pathname
-        // console.log(pathName);
         let title
+        if(pathName.indexOf('product')!==-1) title='商品管理'
         //循环menulist找到path相同的那一项，然后返回它的title并赋值给提前声明好的变量
         menuList.forEach((item)=>{
             //判断当前对象下有children并且是一个数组的时候循环children
@@ -111,9 +111,7 @@ class Header extends Component {
             }
         })
         //存到redux中，用的时候从redux中取
-        // return title
         this.props.saveTitle(title)
-        // console.log(title);
     }
     render() {
         //从redux中获取用户信息
