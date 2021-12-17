@@ -36,20 +36,19 @@ class Detail extends Component {
         let result=this.props.cateList.find((item)=>{
             return item._id===this.state.data.categoryId
         })
-        console.log(result);
         if(result.name) {
             this.setState({categoryName:result.name})
-            console.log(111);
         }
         else this.getCategory()
     }
     componentDidMount(){
         const {id}=this.props.match.params
+        const {productList}=this.props
         const {cateList}=this.props
-        let list=this.props.productList.find(item => item._id===id)
-        if(list){
+        if(productList.length>0) {
+            let list=productList.find(item => item._id===id)
             this.setState({data:list,isLoading:false},()=>{
-                cateList?this.getReduxCate():this.getCategory()
+                cateList.length>0?this.getReduxCate():this.getCategory()
             })
         }
         else this.getDetail()

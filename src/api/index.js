@@ -9,9 +9,6 @@ import {BASE_URL,CITY,WEATHER_AK} from '../config'
 //如果后台没有支持json，那么借助qurey-stirng的stringfy方法转成urlEncoded
 export const reqLogin= data => Myaxios.post(`${BASE_URL}/api1/login`,data)
 
-//请求商品分类列表
-export const reqCategoryList= () => Myaxios.get(`${BASE_URL}/api1/manage/category/list`)
-
 //请求天气信息
 // export const reqWeather = (resolve,reject)=>{
 //     return new Promise(()=>{
@@ -45,6 +42,9 @@ export const reqUpdateList=(productId,status)=>Myaxios.post(`${BASE_URL}/api1/ma
 //根据ID/Name搜索产品分页列表/manage/product/search?pageNum=1&pageSize=5&productName=T
 //(number,PAGE_NUMBER,productType,inputVal)
 export const reqSearchList=(pageNum,pageSize,producetType,inputVal)=>Myaxios.get(`${BASE_URL}/api1/manage/product/search`,{params:{pageNum,pageSize,[producetType]:inputVal}})
+
+//请求商品分类列表
+export const reqCategoryList= () => Myaxios.get(`${BASE_URL}/api1/manage/category/list`)
 
 //根据商品id获取详细信息
 export const reqDetail=(productId)=>Myaxios.get(`${BASE_URL}/api1/manage/product/info`,{params:{productId}})
