@@ -122,7 +122,7 @@ class Product extends Component {
                         <Button type='link' onClick={()=>this.props.history.push(`/admin/prod/product/detail/${item._id}`)}>
                             详情
                         </Button><br/>
-                        <Button type='link' onClick={()=>this.props.history.push('/admin/prod/product/add_update/123456')}>
+                        <Button type='link' onClick={()=>this.props.history.push(`/admin/prod/product/add_update/${item._id}`)}>
                             修改
                         </Button>
                         </>

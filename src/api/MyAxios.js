@@ -9,7 +9,7 @@ import Nprogress from 'nprogress'
 //超时配置值为'0'，这是库的默认值
 //现在，所有使用此实例的请求都将等待2.5秒，然后超时
 const instance = axios.create({
-    timeout:2500
+    // timeout:2500
 });
 
 //覆盖库的默认超时

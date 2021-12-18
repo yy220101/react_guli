@@ -3,6 +3,7 @@ import { Button,Card,List, message } from 'antd'
 import {ArrowLeftOutlined} from '@ant-design/icons'
 import { connect } from 'react-redux'
 import {reqDetail,reqCategory} from '../../../api'
+import {BASE_URL} from '../../../config'
 import './index.less'
 
 const {Item}=List
@@ -42,10 +43,15 @@ class Detail extends Component {
         else this.getCategory()
     }
     componentDidMount(){
+        //从地址栏中取出id
         const {id}=this.props.match.params
+        //从redux中取出商品管理列表
         const {productList}=this.props
+        //从redux中取出商品分类列表
         const {cateList}=this.props
+        //如果redux中有商品管理列表的时候走下边逻辑
         if(productList.length>0) {
+            //遍历
             let list=productList.find(item => item._id===id)
             this.setState({data:list,isLoading:false},()=>{
                 cateList.length>0?this.getReduxCate():this.getCategory()
@@ -91,7 +97,7 @@ class Detail extends Component {
                             {
                                 imgs?
                                 imgs.map((item,index)=>{
-                                    return <img src={`/api1/upload/${item}`} alt='详情图' key='index'/>
+                                    return <img src={`${BASE_URL}/api1/upload/${item}`} alt='详情图' key='index'/>
                                 }):'无'
                             }
                         </div>

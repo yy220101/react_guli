@@ -51,3 +51,12 @@ export const reqDetail=(productId)=>Myaxios.get(`${BASE_URL}/api1/manage/product
 
 //根据分类ID获取分类
 export const reqCategory=(categoryId)=>Myaxios.get(`${BASE_URL}/api1/manage/category/info`,{params:{categoryId}})
+
+//删除图片
+export const reqRemovePic=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/img/delete`,data)
+
+//添加商品
+export const reqAddProduct=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/product/add`,data)
+
+//更新商品
+export const reqUpdateProdList=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/product/update`,data)
