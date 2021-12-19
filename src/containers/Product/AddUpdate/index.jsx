@@ -85,7 +85,7 @@ class AddUpdate extends Component {
         let result
         if(operaType==='add') result =await reqAddProduct({...values,imgs,detail})
         else result=await reqUpdateProdList({...values,imgs,detail,_id})
-        const {data,status,msg}=result
+        const {status,msg}=result
         if(status===0){
             message.success('操作成功',1)
             this.props.history.replace('/admin/prod/product')

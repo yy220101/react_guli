@@ -60,3 +60,9 @@ export const reqAddProduct=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/product
 
 //更新商品
 export const reqUpdateProdList=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/product/update`,data)
+
+//获取角色列表
+export const reqRoleList = ({...data})=>Myaxios.get(`${BASE_URL}/api1/manage/role/list`,{params:data})
+
+//添加角色
+export const reqAddRole= (data)=>Myaxios.post(`${BASE_URL}/api1/manage/role/add`,data)
