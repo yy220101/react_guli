@@ -16,7 +16,7 @@ const { Sider} = Layout;
 //返回一个新的容器组件
 @connect(
     //如果当前组件不需要获取状态值就可以返回一个空的对象，但是不能不写，需要占位
-    state=>({}),
+    state=>({user:state.userInfo.user}),
     //获取操作状态的方法
     {
         saveTitle
@@ -39,24 +39,44 @@ class LeftNav extends Component {
         //icon[name]的含义等同于icon.name含义就是从icon中解构出一个name
         return React.createElement(Icon[name])
     }
+
+    //处理用户权限，能对应显示给用户授权的菜单
+    hasAuth=(item)=>{
+        const {role:{menus},username}=this.props.user
+        if(username==='admin') return true
+        else if(!item.children){
+            return menus.find((item2)=> item.key===item2 )
+        }
+        else if(item.children){
+            // return menus.find((item3)=>{
+            //     return item.children.find((item4)=>{
+            //         return item3===item4.key
+            //     })
+            // })
+            return item.children.some((item3)=>{return menus.indexOf(item3.key)!==-1})
+        }
+    }
+
     //这个一个递归，careateMenu传入一个数组进行遍历，因为二级菜单所以还有数组，
     //这时候再次调用createMenu进入循环，直到完全遍历完所有数组
     createMenu=(target)=>{
         return target.map((item)=>{
-            if(!item.children){
-                return (
-                    <Item key={item.key} icon={this.iconDOM(item.icon)} onClick={()=>this.props.saveTitle(item.title)}>
-                        <Link to={item.path}>{item.title}</Link>
-                    </Item>
-                )
-            }else{
-                return(
-                    <SubMenu key={item.key} icon={this.iconDOM(item.icon)} title={item.title}>
-                        {
-                            this.createMenu(item.children)
-                        }
-                    </SubMenu>
-                )
+            if(this.hasAuth(item)){
+                if(!item.children){
+                    return (
+                        <Item key={item.key} icon={this.iconDOM(item.icon)} onClick={()=>this.props.saveTitle(item.title)}>
+                            <Link to={item.path}>{item.title}</Link>
+                        </Item>
+                    )
+                }else{
+                    return(
+                        <SubMenu key={item.key} icon={this.iconDOM(item.icon)} title={item.title}>
+                            {
+                                this.createMenu(item.children)
+                            }
+                        </SubMenu>
+                    )
+                }
             }
         })
     }

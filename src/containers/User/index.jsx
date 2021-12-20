@@ -87,6 +87,8 @@ export default class User extends Component {
         else message.error(msg,1)
     }
     render() {
+        const {visible,isLoading,userList,roleList,operaType,deleVisible}=this.state
+        const total=userList.length
         //定义表格的列，dataindex要跟数据中要展示的name信息对应，key要跟数据中的key字完全匹配，如果没有
         //使用rowKey解决
         const columns = [
@@ -94,6 +96,17 @@ export default class User extends Component {
                 title: '用户名',
                 dataIndex: 'username',
                 key: 'username',
+            },
+            {
+                title: '所属角色',
+                // dataIndex: 'role_id',
+                key: 'role_id',
+                render:(data)=>{
+                    let obj=roleList.find((item)=>{
+                        return item._id===data.role_id
+                    })
+                    return <span>{obj.name}</span>
+                }
             },
             {
                 title: '邮箱',
@@ -109,7 +122,8 @@ export default class User extends Component {
                 title: '创建时间',
                 dataIndex: 'create_time',
                 key: 'create_time',
-                render:(time)=>time ? moment(time).format("YYYY-MM-DD HH:mm:ss"):''
+                render:(time)=>time ? moment(time).format("YYYY-MM-DD HH:mm:ss"):'',
+                width:'18%'
             },
             {
                 title: '操作',
@@ -123,11 +137,9 @@ export default class User extends Component {
                         </>
                     )
                 },
-                width:'25%'
+                width:'15%'
             }
         ];
-        const {visible,isLoading,userList,roleList,operaType,deleVisible}=this.state
-        const total=userList.length
         return (
             <Card 
             title={
