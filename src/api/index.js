@@ -69,3 +69,15 @@ export const reqAddRole= (data)=>Myaxios.post(`${BASE_URL}/api1/manage/role/add`
 
 //设置权限
 export const reqSetAuth= (data)=>Myaxios.post(`${BASE_URL}/api1/manage/role/update`,data)
+
+//请求用户列表
+export const reqUserList= ()=>Myaxios.get(`${BASE_URL}/api1/manage/user/list`)
+
+//添加用户
+export const reqAddUser=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/user/add`,data)
+
+//修改用户
+export const reqChangeUser=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/user/update`,data)
+
+//删除用户
+export const reqDeleUser=(data)=>Myaxios.post(`${BASE_URL}/api1/manage/user/delete`,data)
