@@ -66,3 +66,6 @@ export const reqRoleList = ({...data})=>Myaxios.get(`${BASE_URL}/api1/manage/rol
 
 //添加角色
 export const reqAddRole= (data)=>Myaxios.post(`${BASE_URL}/api1/manage/role/add`,data)
+
+//设置权限
+export const reqSetAuth= (data)=>Myaxios.post(`${BASE_URL}/api1/manage/role/update`,data)
